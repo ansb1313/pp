@@ -8,7 +8,7 @@ import HISTORY from "./lib/History";
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={HISTORY} basename={process.env.PUBLIC_URL}>
+        <Router history={HISTORY}>
             <App/>
         </Router>
     </Provider>,
