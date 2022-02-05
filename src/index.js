@@ -7,7 +7,7 @@ import store from "./redux/store";
 import HISTORY from "./lib/History";
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={store} basename={process.env.PUBLIC_URL}>
         <Router history={HISTORY}>
             <App/>
         </Router>
