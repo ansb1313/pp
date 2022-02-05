@@ -7,7 +7,6 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path="/" component={Main} />
-            <Route component={NotFound} />
         </Switch>
     );
 };
