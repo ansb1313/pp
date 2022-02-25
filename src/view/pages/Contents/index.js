@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Header = (props) => {
+const Contents = (props) => {
 
   return(
     <Container>
@@ -13,4 +13,4 @@ const Header = (props) => {
 const Container = styled.div`
 `
 
-export default Header
+export default Contents

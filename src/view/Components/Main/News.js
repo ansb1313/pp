@@ -1,149 +1,230 @@
-import React, {useEffect, useState} from "react";
-import contactImg from "./../../../images/jeshoots-com-LtNvQHdKkmw-unsplash.jpg"
+import React, {useState} from "react";
+import cn from 'classnames'
 import styled from "styled-components";
 
-const News = ({scrollValue}) => {
+const News = (props) => {
 
-  const [scroll, setScroll] = useState(false)
+  const contentsTitleArray = ["News & Media","Recent Papers","Recent Posts"]
+  const newItemArray = [
+      {
+          title:"Awards",
+          line1:"Jeung-Hyun and Eunhwi",
+          line2:"received awards!"
+      },
+      {
+          title:"Awards",
+          line1:"Jeung-Hyun and Eunhwi",
+          line2:"received awards!"
+      },
+      {
+          title:"Awards",
+          line1:"Jeung-Hyun and Eunhwi",
+          line2:"received awards!"
+      },
+      {
+          title:"Awards",
+          line1:"Jeung-Hyun and Eunhwi",
+          line2:"received awards!"
+      },
+      {
+          title:"Awards",
+          line1:"Jeung-Hyun and Eunhwi",
+          line2:"received awards!"
+      },
+      {
+          title:"Awards",
+          line1:"Jeung-Hyun and Eunhwi",
+          line2:"received awards!"
+      }
 
-  useEffect(()=>{
-    if(scrollValue >= 1400){
-      setScroll(true)
-    }else{
-      setScroll(false)
-    }
-  },[scrollValue])
+  ]
+  const [selectItem, setSelectItem] = useState("News & Media")
 
   return(
     <Container>
-      <Wrap className={scroll ? "on" : ""}>
-        <Title>
-          <span>News</span>
-          <h4>Lorem Ipsum News</h4>
-        </Title>
+      <TitleWrap>
+        {
+          contentsTitleArray.map((item,i) => {
+            return(
+                <Title
+                    onClick={()=>{setSelectItem(item)}}
+                    className={selectItem == item ? "on" : ""}
+                >
+                  <span>
+                      {item}
+                      {i == 0
+                      &&
+                      <New>
+                        UP
+                      </New>}
+                  </span>
+                  <Border/>
+                </Title>
+            )
+          })
+        }
+      </TitleWrap>
+      <NewItemWrap>
+          {
+              newItemArray.map((item, i) => {
+                  return(
+                      <NewsItem>
+                          <Thumb
+                            className={cn({
+                                yellow:i==0 || i==2 || i==3 || i==5,
+                                pink:i==1|| i==4
+                            })}
+                          >
 
-        <Contents>
-          <Item>
-            <span className={"top"}>Lorem</span>
-            <span className={"title"}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </span>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet aperiam aut deserunt
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet aperiam aut deserunt
-            </p>
-            <span className={"date"}>
-            2022-01-01
-          </span>
-          </Item>
-
-          <Item>
-            <span className={"top"}>Lorem</span>
-            <span className={"title"}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </span>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet aperiam aut deserunt
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet aperiam aut deserunt
-            </p>
-            <span className={"date"}>
-            2022-01-01
-          </span>
-          </Item>
-
-          <Item>
-            <span className={"top"}>Lorem</span>
-            <span className={"title"}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </span>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet aperiam aut deserunt
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet aperiam aut deserunt
-            </p>
-            <span className={"date"}>
-            2022-01-01
-          </span>
-          </Item>
-        </Contents>
-      </Wrap>
-
+                          </Thumb>
+                          <TextArea>
+                              <h4>{item.title}</h4>
+                              <p>{item.line1}</p>
+                              <p>{item.line2}</p>
+                          </TextArea>
+                      </NewsItem>
+                  )
+              })
+          }
+      </NewItemWrap>
     </Container>
   )
 }
 
-export default News
-
 const Container = styled.div`
-  background: #fff;
-  padding: 90px 103px 126px 103px ;
- 
-`
-const Wrap = styled.div`
-  transition: all 0.4s;
-  transform: translateY(100px);
-  opacity: 0;
-  &.on{
-    opacity: 1;
-    transform: none;
-  }
-`
-const Title = styled.div`
-  margin-bottom: 30px;
-  span {
-    font-size: 18px;
-    font-weight: bold;
-    color: rgb(95, 210, 148);
-    margin-bottom: 10px;
-    display: block;
-  }
-  h4{
-    color: #222;
-    font-size: 38px;
-    font-weight: bold;
-    font-family: "Apple LiGothic";
-  }
-`
-const Contents = styled.div`
-    display: flex;
-`
-const Item = styled.div`
-  cursor: pointer;
-  box-sizing: border-box;
-  padding: 35px;
   display: flex;
   flex-direction: column;
-  background: rgb(248, 249, 250);
-  width: 32%;
-  margin-right: 2%;
-  border-radius: 15px;
-  line-height: 1.2;
+  align-items: center;
+  padding: 115px 0 200px 0;
+`
+const Title = styled.div`
+  cursor: pointer;
+  position: relative;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #A8C3F1;
+  padding-bottom: 10px;
+  margin-right: 20px;
+  &.on{
+    span{
+      color:#2F6CDD!important;
+
+    }
+  }
+    span{
+      height: 32px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 32px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #A8C3F1;
+    }
+`
+const TitleWrap = styled.div`
+    display: flex;
+`
+const Border = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  height: 2px;
+  background: #2F6CDD;
   transition: all 0.3s;
-  &:hover{
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  }
-  p{
-    font-family: "Apple LiGothic";
-  }
-  span{
-    width: 100%;;
-  }
-  &:nth-last-child{
-    margin-right: 0;
-  }
-  .top{
-    color: rgb(95, 210, 148);
-    font-weight: bold;
-    margin-bottom: 10px;
-  }  
-  .title{
-    color: #222;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  .date{
-    font-size: 12px;
-    color: #ddd;
-    margin-top: 20px;
+  width: 0px;
+  .on &{
+    width: 105px;
   }
 `
+const New = styled.div`
+  margin-left: 5px;
+  background: #E77D54;
+  border-radius: 50px;
+  color: #fff!important;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 32px;
+  /* or 229% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #FFFFFF;
+`
+
+const NewItemWrap = styled.div`
+  display: flex;
+  flex-wrap:wrap ;
+  width: 1000px;
+  margin-top: 76px;
+`
+
+const NewsItem = styled.div`
+  border-radius: 10px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  cursor: pointer;
+  overflow: hidden;
+  margin-right: 50px;
+  width: 300px;
+  margin-bottom: 60px;
+  &:nth-child(3n){
+    margin-right: 0;
+  }
+`
+const Thumb = styled.div`
+  height: 150px;
+  &.yellow{
+    background: rgba(245, 191, 170, 0.5);
+  }
+  &.pink{
+    background: rgba(216, 149, 171, 0.5);
+  }
+`
+const TextArea = styled.div`
+  box-sizing: border-box;
+  padding: 20px 30px 27px 30px;
+  background: #fff;
+    h4{
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 16px;
+      /* or 67% */
+
+      display: flex;
+      align-items: center;
+
+      color: #000000;
+      height: 50px;
+    }
+      p{
+        display: block;
+        margin-bottom: 15px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 16px;
+        /* or 100% */
+    
+        display: flex;
+        align-items: center;
+    
+        color: #000000;
+      }
+`
+
+export default News
