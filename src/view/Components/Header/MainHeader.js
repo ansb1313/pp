@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import LogoIMG from '../../../images/서울대학교_로고.png'
 import styled from "styled-components";
 
-const MenuArray = ["Home", "Publications", "People", "Research", "News & Media", "Contact"]
+const MenuArray = ["Home", "Publications", "People", "Research", "News & Media", "Contact"];
 
 const MainHeader = (props) => {
 
-    const [menu, setMenu] = useState(false)
+    const [menu, setMenu] = useState(false);
 
     return(
         <Container>
@@ -37,24 +37,28 @@ const MainHeader = (props) => {
                                 }}
                             >
                                 <span>{item}</span>
-                                {
-                                    i == 1
-                                        &&
-                                    <DropDownWrap className={menu == true ? "on" : ""}>
-                                        <DropDownItem>
-                                            <span>Rethink Stress Interventions</span>
-                                        </DropDownItem>
-                                        <DropDownItem>
-                                            <span>Rethink Stress Interventions</span>
-                                        </DropDownItem>
-                                        <DropDownItem>
-                                            <span>Rethink Stress Interventions</span>
-                                        </DropDownItem>
-                                        <DropDownItem>
-                                            <span>Rethink Stress Interventions</span>
-                                        </DropDownItem>
-                                    </DropDownWrap>
-                                }
+
+                                    {
+                                        i == 1
+                                            &&
+                                        <DropDownWrap className={menu == true ? "on" : ""}>
+                                            <DropDownList className={menu == true ? "on" : ""}>
+                                                <DropDownItem>
+                                                    <span>Rethink Stress Interventions</span>
+                                                </DropDownItem>
+                                                <DropDownItem>
+                                                    <span>Rethink Stress Interventions</span>
+                                                </DropDownItem>
+                                                <DropDownItem>
+                                                    <span>Rethink Stress Interventions</span>
+                                                </DropDownItem>
+                                                <DropDownItem>
+                                                    <span>Rethink Stress Interventions</span>
+                                                </DropDownItem>
+                                            </DropDownList>
+                                        </DropDownWrap>
+                                    }
+
                             </MenuItem>
                         )
                     })
@@ -135,9 +139,21 @@ const MenuItem = styled.div`
   }
 `
 const DropDownWrap = styled.div`
+  width: 240px;
   position: absolute;
+  z-index: 9999;
+  pointer-events: none;
+  box-sizing: border-box;
+  padding-top: 10px;
+  &.on{
+    pointer-events: all;
+  }
+`
+const DropDownList = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transition: all 0.3s;
-  top: calc(100% + 15px);
   box-sizing: border-box;
   padding: 22.62px 20px;
   background: #fff;
@@ -151,17 +167,17 @@ const DropDownWrap = styled.div`
     transform: none;
     opacity: 1;
   }
-  &::after{
-    position: absolute;
-    content: "";
-    display: block;
-    width: 100%;
-    opacity: 0;
-    height: 20px;
-    bottom: calc(100% );
-    left: 0;
-    border: solid 1px #111;
-  }
+  //&::after{
+  //  position: absolute;
+  //  content: "";
+  //  display: block;
+  //  width: 100%;
+  //  opacity: 0;
+  //  height: 20px;
+  //  bottom: calc(100% );
+  //  left: 0;
+  //  border: solid 1px #111;
+  //}
 `
 const DropDownItem = styled.div`
   margin-bottom: 22.62px;  

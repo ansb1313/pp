@@ -63,6 +63,7 @@ export default About;
 
 const Container = styled.div`
   padding: 100px 0;
+  margin-top: 100px;
   position: relative;
   display: flex;
   //background: #fff;
