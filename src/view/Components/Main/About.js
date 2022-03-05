@@ -1,117 +1,104 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
-import {FaConnectdevelop} from "@react-icons/all-files/fa/FaConnectdevelop";
-import {AiOutlineFileSearch} from "@react-icons/all-files/ai/AiOutlineFileSearch";
-import {BiNetworkChart} from "@react-icons/all-files/bi/BiNetworkChart";
-import {GrContactInfo} from "@react-icons/all-files/gr/GrContactInfo";
 
-const iconArr = [
-    <FaConnectdevelop size={70} />,
-    <GrContactInfo size={70} />,
-    <AiOutlineFileSearch size={70} />,
-    <BiNetworkChart size={70} />
-]
-const iconName=["Core Value", "Vision", "Research", "Network"]
+const About = (props) => {
 
-const About = ({scrollValue}) => {
+  useEffect(()=>{
+      document.addEventListener('scroll',()=>{
+          console.log('window.scrollY',window.scrollY)
+      })
+  },[]);
 
   return(
     <Container>
-      <Wrap className={ scrollValue >= 230 ? "on" : ""} >
-          <Title>
-              <h4>Lorem About Title</h4>
-          </Title>
-          <ItemWrap>
-            {
-                iconArr.map((item, i) => (
-                    <Item>
-                        {item}
-                        <TextArea>
-                            <span>{iconName[i]}</span>
-                            <p>
-                                Lorem ipsum dolor sit amet, <br/> consectetur adipisicing elit.
-                            </p>
-                        </TextArea>
+     <Contents>
+         <Left>
+            <LeftContents>
+                <h1>Lorem</h1>
 
-                    </Item>
-                ))
-            }
-          </ItemWrap>
-      </Wrap>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    molestias non nulla perferendis perspiciatis quas sapiente soluta tempora ullam, vitae!</p>
+            </LeftContents>
+         </Left>
+         <Right>
+             <RightContents>
+                 <h1>Lorem</h1>
+                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                     molestias non nulla perferendis perspiciatis quas sapiente soluta tempora ullam, vitae!</p>
+             </RightContents>
+             <RightContents>
+                 <h1>Lorem</h1>
+                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                     molestias non nulla perferendis perspiciatis quas sapiente soluta tempora ullam, vitae!</p>
+             </RightContents>
+             <RightContents>
+                 <h1>Lorem</h1>
+                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                     molestias non nulla perferendis perspiciatis quas sapiente soluta tempora ullam, vitae!</p>
+             </RightContents>
+             <RightContents>
+                 <h1>Lorem</h1>
+                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                     molestias non nulla perferendis perspiciatis quas sapiente soluta tempora ullam, vitae!</p>
+             </RightContents>
+             <RightContents>
+                 <h1>Lorem</h1>
+                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                     molestias non nulla perferendis perspiciatis quas sapiente soluta tempora ullam, vitae!</p>
+             </RightContents>
+             <RightContents>
+                 <h1>Lorem</h1>
+                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                     molestias non nulla perferendis perspiciatis quas sapiente soluta tempora ullam, vitae!</p>
+             </RightContents>
+
+         </Right>
+     </Contents>
+
     </Container>  
   )  
 }
 
-export default About
+export default About;
 
 const Container = styled.div`
-    background: #fff;
-  box-sizing: border-box;
-  padding: 100px 103px;
-  overflow: hidden;
-
-`
-const Wrap = styled.div`
-  transition: all 0.6s;
-  transform: translateY(80px);  
-  opacity: 0;
-  &.on{
-    opacity: 1;
-    transform: none;
-  }
-`
-const ItemWrap = styled.div`
-    display: flex;
+  padding: 100px 0;
+  position: relative;
+  display: flex;
+  //background: #fff;
   justify-content: center;
 `
-const Item = styled.div`
-  //#7ab5c7
-  margin: 0 40px;
+const Contents = styled.div`
+  display: flex;  
+  width: 1200px;
+  position: relative;
+`
+const Left = styled.div`
+  width: 50%;
+  height: 100vh;
+  max-height: 600px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
-  svg{
-   
-    //transform: scale(5);
-    //fill: #7ab5c7;
-    fill:rgb(101, 219, 156);
-
-    path{
-      //stroke: #7ab5c7;
-      stroke: rgb(101, 219, 156);;
-    }
-  }
+  position: sticky;
+  top: calc(50% - 300px);
 `
-const Title = styled.div`
-  font-size: 50px;
-  text-align: center;
-  font-family: "Apple SD Gothic Neo";
-  font-weight: bold;
-  color: #191919;
-  margin-bottom: 50px;
+const Right = styled.div`
+  width: 50%;
+  position: relative;
 `
-const TextArea = styled.div`
-   margin-top: 20px; 
-  text-align: center;
-  color: #222;
-
-  span{
-    text-align: center;
-    font-family: "Apple LiGothic";
-    font-weight: 400;
-    letter-spacing: 1px;
-    font-size: 30px;
-    display: block;
+const RightContents = styled.div`
+  h1{
+    font-weight: bold;
+    font-size: 24px;
     margin-bottom: 20px;
   }
   p{
-    font-family: "Apple SD Gothic Neo";
-    font-size: 16px;
+    display: block;
     line-height: 1.2;
-    font-weight: bold;
   }
+   margin-bottom: 200px; 
 `
-const More = styled.div`
-    margin-top: 40px;
+const LeftContents = styled.div`
+  box-sizing: border-box;
+  padding: 100px;
 `
