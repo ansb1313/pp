@@ -1,12 +1,33 @@
 import React, {useState} from "react";
 import LogoIMG from '../../../images/서울대학교_로고.png'
 import styled from "styled-components";
+import {authService} from '../../../firebase/firebase'
+import {useHistory} from "react-router-dom";
+import { signOut } from "firebase/auth"
 
 const MenuArray = ["Home", "Publications", "People", "Research", "News & Media", "Contact"];
 
 const MainHeader = (props) => {
 
+    const history = useHistory()
+    const userId = window.sessionStorage.getItem("userId")
     const [menu, setMenu] = useState(false);
+    const onClickLogout = async () => {
+        try {
+            const result = await signOut(authService)
+                .then((res) => {
+                    window.sessionStorage.removeItem("token")
+                    window.sessionStorage.removeItem("userId")
+
+                })
+                .then((res)=>{
+                    history.push("/login")
+                })
+        }catch (e) {
+            console.log('e',e)
+
+        }
+    }
 
     return(
         <Container>
@@ -22,6 +43,12 @@ const MainHeader = (props) => {
                     </p>
                 </LogoText>
             </Logo>
+            <User>
+                <span>{userId}</span>
+                <span
+                    onClick={onClickLogout}
+                >Logout</span>
+            </User>
             <MenuItems>
                 {
                     MenuArray.map((item,i) => {
@@ -74,6 +101,7 @@ const Container = styled.div`
   padding: 58px 90px 0 90px;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 `
 const Logo = styled.div`
     display: flex;
@@ -81,6 +109,29 @@ const Logo = styled.div`
   width: 241px;
   height: 68px;
   cursor: pointer;
+`
+const User = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 120px;
+  display: flex;
+  align-items: center;
+
+  span {
+    &:nth-child(1) {
+      color: #757575;
+      font-size: 14px;
+      margin-right: 20px;
+    }
+
+    &:nth-child(2) {
+      cursor: pointer;
+      font-size: 14px;
+      padding: 5px 10px;
+      display: block;
+      border: solid 1px rgba(117, 117, 117, 0.75);
+    }
+  }
 `
 const LogoImg = styled.div`
   img{

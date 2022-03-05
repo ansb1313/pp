@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import HeaderContainer from "./HeaderContainer";
 import Main from "../Components/Main/Main";
 import News from "../Components/Main/News";
@@ -7,11 +8,20 @@ import About from "../Components/Main/About";
 
 const MainContainer = (props) => {
 
-  return(
+    const token = window.sessionStorage.getItem("token")
+    const history = useHistory();
+
+    useEffect(()=>{
+        if(token == null){
+            history.push("/login")
+        }
+    },[token])
+
+    return(
     <Container>
       <HeaderContainer/>
       <Main />
-      <About />
+      <About/>
       <News />
     </Container>
   )

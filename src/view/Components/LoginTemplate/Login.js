@@ -1,13 +1,19 @@
 import React, {useState} from "react";
 import LogoImg from '../../../images/logo.png'
+import {useHistory} from "react-router-dom"
 import styled from "styled-components";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
+import {authService} from "../../../firebase/firebase";
 
 const Login = (props) => {
 
+  const history = useHistory()
   const [user, setUser] = useState({
       userId:"",
       password:""
   });
+
+  const [message, setMessage] = useState(false)
 
   const onChange = (e, type) => {
       const value = e.target.value;
@@ -15,6 +21,40 @@ const Login = (props) => {
           ...user,
           [type]:value
       })
+  }
+
+  const onClickJoin = async () => {
+      try {
+          const result = await createUserWithEmailAndPassword(authService, user.userId, user.password)
+              .then((res)=>{
+                  setTimeout(()=>{
+                      setMessage(true);
+                      setTimeout(()=>{
+                          setMessage(false)
+                      },1000)
+                  })
+
+              })
+
+      }catch (e) {
+          console.log('e',e)
+      }
+  }
+
+  const onClickLogin = async () => {
+      try {
+          const result = await signInWithEmailAndPassword(authService, user.userId, user.password)
+              .then((res) => {
+                  console.log('res',res, res._tokenResponse);
+                  const token = window.sessionStorage.setItem('token', res._tokenResponse.idToken)
+                  window.sessionStorage.setItem('userId', res.user.email)
+                  if(token !== null){
+                      history.push("/")
+                  }
+              })
+      }catch (e) {
+          console.log('e',e)
+      }
   }
 
   return(
@@ -30,15 +70,21 @@ const Login = (props) => {
                </InputItem>
                 <InputItem>
                     <span>password</span>
-                    <input type={"text"} value={user.password} onChange={(e)=>{onChange(e, "password")}}/>
+                    <input type={"password"} value={user.password} onChange={(e)=>{onChange(e, "password")}}/>
                 </InputItem>
             </InputArea>
-            <Button>
+            <Button onClick={onClickLogin}>
                 로그인
             </Button>
-            <Button>
+            <Button
+                onClick={onClickJoin}
+            >
                 회원가입
             </Button>
+            <Join className={message == true ? "on" : ""}>
+                <span>회원가입이 완료되었습니다.</span>
+
+            </Join>
         </Contents>
     </Container>
   )
@@ -57,6 +103,7 @@ const Container = styled.div`
 `
 const Contents = styled.div`
   background: #fff;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,6 +142,7 @@ const InputItem = styled.div`
     border: solid 1px rgba(207, 203, 203, 0.85);
     box-sizing: border-box;
     padding: 5px 10px;
+    color: rgba(107, 110, 111, 1);
   }
 `
 const Button = styled.span`
@@ -109,4 +157,22 @@ const Button = styled.span`
   margin-bottom: 20px;
   font-size: 14px;
   cursor: pointer;
+`
+const Join = styled.div`
+  background: rgba(23, 23, 23, 0.8);
+  position: absolute;
+  padding: 20px;
+  border-radius: 6px;
+  top: 40%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  &.on{
+    pointer-events: all;
+    opacity: 1;
+  }
+  span{
+    color: #fff;
+    font-size: 12px;
+  }
 `
