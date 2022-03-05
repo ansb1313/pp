@@ -1,19 +1,29 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 
 const About = (props) => {
 
+  const [on, setOn] = useState(0)
+
   useEffect(()=>{
       document.addEventListener('scroll',()=>{
           console.log('window.scrollY',window.scrollY)
+          if(window.scrollY >= 2000){
+              setOn(1);
+          }else{
+              setOn(0)
+          }
       })
+
   },[]);
+  
+  console.log('on',on)
 
   return(
     <Container>
      <Contents>
          <Left>
-            <LeftContents>
+            <LeftContents className={on == 1 ? "on" : ""}>
                 <h1>Lorem</h1>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -102,4 +112,28 @@ const RightContents = styled.div`
 const LeftContents = styled.div`
   box-sizing: border-box;
   padding: 100px;
+  transition: all 0.3s;
+  h1{
+    transition: all 0.3s;
+    margin-bottom: 0px;
+    font-weight: normal;
+  }
+  p{
+    transition: all 0.3s;
+    font-weight: normal;
+    line-height: 1;
+  }
+  &.on{
+    h1{
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    p{
+      font-weight: bold;
+      line-height: 1.4;
+    }
+  }
+`
+const LeftBox = styled.div`
+    
 `
