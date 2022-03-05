@@ -8,7 +8,7 @@ const About = (props) => {
   useEffect(()=>{
       document.addEventListener('scroll',()=>{
           console.log('window.scrollY',window.scrollY)
-          if(window.scrollY >= 2000){
+          if((window.scrollY >= 2000) && (window.scrollY <= 2650)){
               setOn(1);
           }else{
               setOn(0)
@@ -116,21 +116,20 @@ const LeftContents = styled.div`
   h1{
     transition: all 0.3s;
     margin-bottom: 0px;
-    font-weight: normal;
+    font-weight: bold;
   }
   p{
     transition: all 0.3s;
-    font-weight: normal;
+    font-weight: bold;
     line-height: 1;
   }
   &.on{
     h1{
       margin-bottom: 20px;
-      font-weight: bold;
+   
     }
     p{
-      font-weight: bold;
-      line-height: 1.4;
+      line-height: 2;
     }
   }
 `
